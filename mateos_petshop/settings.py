@@ -16,6 +16,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Grappelli config
+
+GRAPPELLI_ADMIN_TITLE = "Mateo's PetShop"
+GRAPPELLI_SWITCH_USER = True
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -31,6 +37,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,9 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'debug_toolbar',
+    'django_extensions',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'mateos_petshop.urls'
@@ -76,9 +90,14 @@ WSGI_APPLICATION = 'mateos_petshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mateos_petshop_db',
+        'USER': 'usuario',
+        'PASSWORD': 'ecosabio2025',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
+
 }
 
 
@@ -122,3 +141,31 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+# Ips permited
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Mateo's Petshop Admin",
+    "site_header": "Panel de Administración",
+    "site_brand": "Mateo's Petshop",
+    "welcome_sign": "Bienvenido al panel de Mateo's Petshop",
+    "copyright": "Mateo's Petshop © 2025",
+    "search_model": "auth.User",  # Modelo para búsqueda rápida
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "order_with_respect_to": ["auth", "api"],  # Orden apps
+}
