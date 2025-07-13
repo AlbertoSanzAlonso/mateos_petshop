@@ -1,0 +1,48 @@
+# ─── Python ───────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ─── Entornos virtuales ───────────────────
+venv/
+env/
+.mateos_petshop_env/
+.mateos_petshop/
+*.env
+
+# ─── Archivos de Conda ────────────────────
+*.conda
+*.ipynb_checkpoints
+
+# ─── Bases de datos ───────────────────────
+*.sqlite3
+*.db
+
+# ─── Django ───────────────────────────────
+/media/
+/staticfiles/
+/static/
+
+# ─── Logs ─────────────────────────────────
+*.log
+
+# ─── IDEs/Editor ──────────────────────────
+.vscode/
+.idea/
+*.swp
+
+# ─── Sistema ──────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─── Node.js (si añades React después) ────
+node_modules/
+build/
+dist/
+
+# ─── Git ──────────────────────────────────
+.git/
+
+# ─── Archivos de configuración opcionales ─
+*.bak
+*.tmp
